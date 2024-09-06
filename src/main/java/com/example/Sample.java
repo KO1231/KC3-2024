@@ -14,6 +14,11 @@ public class Sample {
 		DiscordClient client = DiscordClient.create(token);
 		GatewayDiscordClient gateway = client.login().block();
 		
+		if (gateway == null) {
+			System.out.println("ログインに失敗しました。");
+			return;
+		}
+		
 		/* ------- ログイン完了 ------- **/
 		
 		gateway.on(MessageCreateEvent.class).subscribe(event -> {
@@ -22,7 +27,11 @@ public class Sample {
 			Message message = event.getMessage();
 			if ("!ping".equals(message.getContent())) {
 				MessageChannel channel = message.getChannel().block();
-				channel.createMessage("Pong!").block();
+				if (channel == null) {
+					System.out.println("メッセージの送信元チャンネルが取得できませんでした。");
+				} else {
+					channel.createMessage("Pong!").block();
+				}
 			}
 		});
 		
@@ -31,9 +40,9 @@ public class Sample {
 			// メンバーを取得
 			Member member = event.getMember();
 			MessageChannel channel = member.getPrivateChannel().block();
-			if(channel == null) {
+			if (channel == null) {
 				System.out.println("DMチャンネルが取得できませんでした。");
-			}else{
+			} else {
 				channel.createMessage("ようこそ！").block();
 			}
 		});

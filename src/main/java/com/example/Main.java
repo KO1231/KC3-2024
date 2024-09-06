@@ -13,6 +13,11 @@ public class Main {
 		DiscordClient client = DiscordClient.create(token);
 		GatewayDiscordClient gateway = client.login().block();
 		
+		if (gateway == null) {
+			System.out.println("ログインに失敗しました。");
+			return;
+		}
+		
 		/* ------- ログイン完了 ------- **/
 		
 		gateway.on(MessageCreateEvent.class).subscribe(event -> {
