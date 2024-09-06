@@ -6,7 +6,7 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.channel.MessageChannel;
 
-public class Main {
+public class Sample {
 	public static void main(String[] args) {
 		String token = "TOKENをここに入力してください。";
 		DiscordClient client = DiscordClient.create(token);
