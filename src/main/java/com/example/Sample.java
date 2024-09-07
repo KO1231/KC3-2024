@@ -25,11 +25,13 @@ public class Sample {
 			/* メッセージ投稿イベント **/
 			// メッセージを取得
 			Message message = event.getMessage();
-			if ("!ping".equals(message.getContent())) {
-				MessageChannel channel = message.getChannel().block();
-				if (channel == null) {
-					System.out.println("メッセージの送信元チャンネルが取得できませんでした。");
-				} else {
+			MessageChannel channel = message.getChannel().block();
+			String messageContent = message.getContent();
+			
+			if(channel == null){
+				System.out.println("メッセージの送信元チャンネルが取得できませんでした。");
+			}else{
+				if ("!ping".equals(messageContent)) {
 					channel.createMessage("Pong!").block();
 				}
 			}
