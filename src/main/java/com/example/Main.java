@@ -6,6 +6,7 @@ import discord4j.core.event.domain.guild.MemberJoinEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Member;
 import discord4j.core.object.entity.Message;
+import discord4j.core.object.entity.channel.MessageChannel;
 
 public class Main {
 	public static void main(String[] args) {
@@ -24,6 +25,8 @@ public class Main {
 			/* メッセージ投稿イベント **/
 			// メッセージを取得
 			Message message = event.getMessage();
+			MessageChannel channel = message.getChannel().block();
+			String messageContent = message.getContent();
 			
 		});
 		
